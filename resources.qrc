@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/cards">
+        <file>assets/cards/PNG/card_back.png</file>
+        <file>assets/cards/PNG/card_clubs_02.png</file>
+        <file>assets/cards/PNG/card_clubs_03.png</file>
+        <file>assets/cards/PNG/card_clubs_04.png</file>
+    </qresource>
+</RCC>
