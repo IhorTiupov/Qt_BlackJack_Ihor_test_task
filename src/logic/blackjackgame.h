@@ -6,7 +6,7 @@
 
 enum class GameState
 {
-    NotStarted,
+    ReadyToStart,
     PlayerTurn,
     DealerTurn,
     Finihed
@@ -14,7 +14,7 @@ enum class GameState
 
 enum class GameResult
 {
-    ReadyForStart,
+    None,
     PlayerWin,
     DealerWin,
     NoWinner
@@ -29,7 +29,7 @@ public:
     void playerHit();
     void playerStand();
 
-    GameState gameState()const;
+    GameState  gameState()const;
     GameResult gameResult()const;
 
     const Hand& playerHand() const;
@@ -40,9 +40,9 @@ private:
     void checkWinner();
 
 private:
-    Deck deck_m;
-    Hand playerHand_m;
-    Hand dealerHand_m;
+    Deck       deck_m;
+    Hand       playerHand_m;
+    Hand       dealerHand_m;
     GameState  stateGame_m;
     GameResult resultGame_m;
 };
