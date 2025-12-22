@@ -1,9 +1,12 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QDebug>
+
+//#include "logic/Player.h"
+
 
 
 MainWindow::MainWindow(QWidget *parent)

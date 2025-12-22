@@ -46,6 +46,18 @@ endif()
 
 target_link_libraries(Qt_BlackJack_Ihor_test_task PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
+target_sources(Qt_BlackJack_Ihor_test_task
+    PRIVATE
+        src/logic/Player.cpp
+        src/logic/Deck.cpp
+        src/logic/Hand.cpp
+)
+
+target_include_directories(Qt_BlackJack_Ihor_test_task
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
 set_target_properties(Qt_BlackJack_Ihor_test_task PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
