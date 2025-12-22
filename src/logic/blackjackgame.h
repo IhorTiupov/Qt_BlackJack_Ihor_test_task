@@ -2,6 +2,7 @@
 
 #include "deck.h"
 #include "hand.h"
+#include "player.h"
 
 
 enum class GameState
@@ -41,8 +42,8 @@ private:
 
 private:
     Deck       deck_m;
-    Hand       playerHand_m;
-    Hand       dealerHand_m;
+    Player     player_m;
+    Player     dealer_m;
     GameState  stateGame_m;
     GameResult resultGame_m;
 };

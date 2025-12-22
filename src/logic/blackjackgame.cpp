@@ -1,7 +1,10 @@
 #include "blackjackgame.h"
 
-BlackJackGame::BlackJackGame(): stateGame_m(GameState::ReadyToStart),
-                                resultGame_m(GameResult::None)
+BlackJackGame::BlackJackGame():
+    player_m("Player"),
+    dealer_m("Dealer"),
+    stateGame_m(GameState::ReadyToStart),
+    resultGame_m(GameResult::None)
 {}
 
 void BlackJackGame::startNewGame()
@@ -9,19 +12,19 @@ void BlackJackGame::startNewGame()
     deck_m = Deck();
     deck_m.shuffleCards();
 
-    playerHand_m.clear();
-    dealerHand_m.clear();
+    player_m.clearHand();
+    dealer_m.clearHand();
 
-    playerHand_m.addCard(deck_m.drawCard());
-    dealerHand_m.addCard(deck_m.drawCard());
+    player_m.hand().addCard(deck_m.drawCard());
+    dealer_m.hand().addCard(deck_m.drawCard());
 
-    playerHand_m.addCard(deck_m.drawCard());
-    dealerHand_m.addCard(deck_m.drawCard());
+    player_m.hand().addCard(deck_m.drawCard());
+    dealer_m.hand().addCard(deck_m.drawCard());
 
     stateGame_m  = GameState::PlayerTurn;
     resultGame_m = GameResult::None;
 
-    if(playerHand_m.hasBlackJack())
+    if(player_m.hand().hasBlackJack())
     {
         stateGame_m=GameState::Finihed;
         checkWinner();
@@ -35,9 +38,9 @@ void BlackJackGame::playerHit()
         return;
     }
 
-    playerHand_m.addCard(deck_m.drawCard());
+    player_m.hand().addCard(deck_m.drawCard());
 
-    if(playerHand_m.isBust())
+    if(player_m.hand().isBust())
     {
         stateGame_m = GameState::Finihed;
         checkWinner();
@@ -68,32 +71,32 @@ GameResult BlackJackGame::gameResult() const
 
 const Hand &BlackJackGame::playerHand() const
 {
-    return playerHand_m;
+    return player_m.hand();
 }
 
 const Hand &BlackJackGame::dealerHand() const
 {
-    return dealerHand_m;
+    return dealer_m.hand();
 }
 
 void BlackJackGame::dealerPlay()
 {
-    while (dealerHand_m.calculateScore())
+    while (dealer_m.hand().calculateScore())
     {
-        dealerHand_m.addCard(deck_m.drawCard());
+        dealer_m.hand().addCard(deck_m.drawCard());
     }
 }
 
 void BlackJackGame::checkWinner()
 {
-    int playerScore = playerHand_m.calculateScore();
-    int dealerScore = dealerHand_m.calculateScore();
+    int playerScore = player_m.hand().calculateScore();
+    int dealerScore = dealer_m.hand().calculateScore();
 
-    if(playerHand_m.isBust())
+    if(player_m.hand().isBust())
     {
         resultGame_m = GameResult::DealerWin;
     }
-    else if(dealerHand_m.isBust())
+    else if(dealer_m.hand().isBust())
     {
         resultGame_m = GameResult::PlayerWin;
     }
