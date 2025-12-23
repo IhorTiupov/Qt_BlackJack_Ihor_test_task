@@ -41,8 +41,9 @@ struct Card
 
         if(rank == Rank::Ace)
         {
-            return 10;
+            return 11;
         }
+        return 10;
     }
 };
 
