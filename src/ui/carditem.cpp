@@ -34,7 +34,7 @@ QString CardItem::rankToString(Rank rank)
     case Rank::Queen: return "queen";
     case Rank::Jack:  return "jack";
     default:
-        return QString::number(static_cast<int>(rank));
+        return QString("%1").arg(static_cast<int>(rank), 2, 10, QChar('0'));
     }
 }
 
@@ -76,9 +76,18 @@ void CardItem::updatePixmap()
         path = ":/cards/assets/cards/PNG/card_back.png";
     }
     QPixmap pix = loadPixmap(path); //new
+    if(pix.isNull())
+    {
+        qDebug() << "pixmap is NULL for path: " << path;
+    }
+    else
+    {
+        qDebug() << "pixmap loaded: " << path;
+    }
     setPixmap(QPixmap(pix)); //new
     setScale(0.4);
-    qDebug() << "Loading pixmap:" << path;
+    qDebug() << "Card scale: " << scale_m;
+    qDebug() << "Loading pixmap: " << path;
 
 }
 

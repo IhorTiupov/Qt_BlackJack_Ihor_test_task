@@ -6,7 +6,7 @@
 
 static constexpr int CARD_WIDTH    = 120;
 static constexpr int CARD_HEIGHT   = 180;
-static constexpr int CARD_DISTANCE = 140;
+static constexpr int CARD_DISTANCE = 100;
 
 
 GameView::GameView(QWidget* parent):
@@ -16,7 +16,7 @@ GameView::GameView(QWidget* parent):
     scene_m->setBackgroundBrush(QBrush(Qt::darkGreen));
 
     setScene(scene_m);
-    scene_m->setSceneRect(0, 0, 800, 600);
+    scene_m->setSceneRect(0, 0, 1200, 800);
     setAlignment(Qt::AlignCenter);
 }
 
@@ -28,26 +28,6 @@ void GameView::updateFromGame(const BlackJackGame& game)
     drawPlayerHand(game);
     drawDeck();
 
-    //QRectF itemsRect = scene_m->itemsBoundingRect();
-
-//    QRectF cardsRect;
-//    for (auto* item : scene_m->items())
-//    {
-//        if(dynamic_cast<CardItem*>(item))
-//        {
-//            cardsRect |= item->boundingRect().translated(item->pos());
-//        }
-//    }
-//    if(!cardsRect.isEmpty())
-//    {
-//        fitInView(cardsRect, Qt::IgnoreAspectRatio);
-//    }
-
-    //if(!itemsRect.isEmpty())
-    //{
-    //    fitInView(itemsRect, Qt::KeepAspectRatio);
-    //}
-    //scene_m->addRect(0, 0, 800, 600, QPen(Qt::red));
     setAlignment(Qt::AlignCenter);
 }
 
@@ -64,7 +44,7 @@ void GameView::drawPlayerHand(const BlackJackGame& game)
 
     for (const Card& card : hand.getCards())
     {
-        auto* item = new CardItem(card, 0.3); //new
+        auto* item = new CardItem(card, 0.3);
         item->setPos(x, y);
         scene_m->addItem(item);
         x+= CARD_DISTANCE;
@@ -75,19 +55,10 @@ void GameView::drawPlayerHand(const BlackJackGame& game)
 void GameView::drawDealerHand(const BlackJackGame& game)
 {
     const Hand& hand = game.dealerHand();
-    int x = 100;
+    int x = 200;
     int y = 50;
 
-    bool hideSecondCard;
-
-    if(game.gameState() == GameState::PlayerTurn)
-    {
-        hideSecondCard = true;
-    }
-    else
-    {
-        hideSecondCard = false;
-    }
+    bool hideSecondCard = (game.gameState() == GameState::PlayerTurn);
 
     int index = 0;
 
