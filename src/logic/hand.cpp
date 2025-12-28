@@ -14,18 +14,21 @@ int Hand::calculateScore() const
 {
     int totalScore = 0;
     int aceCount = 0;
+
     for(const Card& card: handCards_m)
     {
         totalScore +=card.value();
+
         if(card.rank == Rank::Ace)
         {
             ++aceCount;
         }
-        while (totalScore > 21 && aceCount > 0)
-        {
-            totalScore -=10;
-            --aceCount;
-        }
+    }
+
+    while (totalScore > 21 && aceCount > 0)
+    {
+        totalScore -=10;
+        --aceCount;
     }
     return totalScore;
 }

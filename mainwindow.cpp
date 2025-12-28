@@ -1,11 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QGraphicsScene>
-#include <QGraphicsPixmapItem>
-#include <QDebug>
+#include <QPushButton>
 
-//#include "logic/Player.h"
 
 
 
@@ -15,7 +12,21 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    auto* scene = new QGraphicsScene(this);
+    view_m = ui->graphicsView;
+
+    game_m.startNewGame();
+    view_m->updateFromGame(game_m);
+
+    connect(ui->pushButtonHit, &QPushButton::clicked,
+            this, &MainWindow::onHitClicked);
+
+    connect(ui->pushButtonStand, &QPushButton::clicked,
+            this, &MainWindow::onStandClicked);
+
+
+
+
+    /*auto* scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
 
     QPixmap pix(":/cards/assets/cards/PNG/card_back.png");
@@ -30,12 +41,23 @@ MainWindow::MainWindow(QWidget *parent)
         scene->addPixmap(pix);
         scene->setSceneRect(pix.rect());
     }
+    */
 }
-
-
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onHitClicked()
+{
+    game_m.playerHit();
+    view_m->updateFromGame(game_m);
+}
+
+void MainWindow::onStandClicked()
+{
+    game_m.playerStand();
+    view_m->updateFromGame(game_m);
 }
 

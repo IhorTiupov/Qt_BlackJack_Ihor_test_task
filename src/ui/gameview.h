@@ -19,6 +19,7 @@ private:
     void clearScene();
     void drawPlayerHand(const BlackJackGame& game);
     void drawDealerHand(const BlackJackGame& game);
+    void drawDeck();
 
 private:
     QGraphicsScene* scene_m;

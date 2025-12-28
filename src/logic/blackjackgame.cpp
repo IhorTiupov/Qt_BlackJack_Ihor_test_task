@@ -21,12 +21,12 @@ void BlackJackGame::startNewGame()
     player_m.hand().addCard(deck_m.drawCard());
     dealer_m.hand().addCard(deck_m.drawCard());
 
-    stateGame_m  = GameState::PlayerTurn;
+    stateGame_m  = GameState ::PlayerTurn;
     resultGame_m = GameResult::None;
 
-    if(player_m.hand().hasBlackJack())
+    if(player_m.hand().hasBlackJack() || dealer_m.hand().hasBlackJack() )
     {
-        stateGame_m=GameState::Finihed;
+        stateGame_m = GameState::Finished;
         checkWinner();
     }
 }
@@ -42,7 +42,7 @@ void BlackJackGame::playerHit()
 
     if(player_m.hand().isBust())
     {
-        stateGame_m = GameState::Finihed;
+        stateGame_m = GameState::Finished;
         checkWinner();
     }
 }
@@ -56,7 +56,11 @@ void BlackJackGame::playerStand()
 
     stateGame_m = GameState::DealerTurn;
     dealerPlay();
-    checkWinner();
+
+    //if(dealer_m.hand().isBust() || dealer_m.hand().calculateScore() >= 17)
+    //{
+    //    checkWinner();
+    //}
 }
 
 GameState BlackJackGame::gameState() const
@@ -81,7 +85,7 @@ const Hand &BlackJackGame::dealerHand() const
 
 void BlackJackGame::dealerPlay()
 {
-    while (dealer_m.hand().calculateScore())
+    while (dealer_m.hand().calculateScore() < 17)
     {
         dealer_m.hand().addCard(deck_m.drawCard());
     }
@@ -112,5 +116,13 @@ void BlackJackGame::checkWinner()
     {
         resultGame_m = GameResult::NoWinner;
     }
-    stateGame_m = GameState::Finihed;
+    stateGame_m = GameState::Finished;
+}
+
+void BlackJackGame::showDealerCards()
+{
+    if(stateGame_m == GameState::DealerTurn)
+    {
+        checkWinner();
+    }
 }

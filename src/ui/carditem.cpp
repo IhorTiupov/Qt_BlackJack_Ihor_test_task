@@ -1,10 +1,14 @@
 #include "carditem.h"
 #include <QString>
+#include <QMap> //new
 
-CardItem::CardItem(const Card& card, QGraphicsItem* parent):
+static QMap<QString, QPixmap> pixmapCache;
+
+CardItem::CardItem(const Card& card,qreal scale, QGraphicsItem* parent): //new
     QGraphicsPixmapItem(parent),
     card_m(card),
-    faceSideCard_m(true)
+    faceSideCard_m(true),
+    scale_m(scale) //new
 {
     updatePixmap();
 }
@@ -45,6 +49,17 @@ bool CardItem::isFaceCardUp() const
     return faceSideCard_m;
 }
 
+QPixmap CardItem::loadPixmap(const QString& path) // new
+{
+    if(pixmapCache.contains(path))
+    {
+        return pixmapCache[path];
+    }
+    QPixmap pix(path);
+    pixmapCache[path] = pix;
+    return pix;
+}
+
 void CardItem::updatePixmap()
 {
     QString path;
@@ -54,12 +69,16 @@ void CardItem::updatePixmap()
         path = QString(":/cards/assets/cards/PNG/card_%1_%2.png").
                arg(suitToString(card_m.suit)).
                arg(rankToString(card_m.rank));
+        qDebug() << "Loading pixmap:" << path;
     }
     else
     {
         path = ":/cards/assets/cards/PNG/card_back.png";
     }
+    QPixmap pix = loadPixmap(path); //new
+    setPixmap(QPixmap(pix)); //new
+    setScale(0.4);
+    qDebug() << "Loading pixmap:" << path;
 
-    setPixmap(QPixmap(path));
 }
 

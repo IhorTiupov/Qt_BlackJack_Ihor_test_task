@@ -51,11 +51,15 @@ target_sources(Qt_BlackJack_Ihor_test_task
         src/logic/Player.cpp
         src/logic/Deck.cpp
         src/logic/Hand.cpp
+        src/logic/BlackJackGame.cpp
+        src/ui/GameView.cpp
+        src/ui/CardItem.cpp
 )
 
 target_include_directories(Qt_BlackJack_Ihor_test_task
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/ui
 )
 
 set_target_properties(Qt_BlackJack_Ihor_test_task PROPERTIES

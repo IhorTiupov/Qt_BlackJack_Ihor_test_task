@@ -10,7 +10,7 @@ enum class GameState
     ReadyToStart,
     PlayerTurn,
     DealerTurn,
-    Finihed
+    Finished
 };
 
 enum class GameResult
@@ -39,6 +39,7 @@ public:
 private:
     void dealerPlay();
     void checkWinner();
+    void showDealerCards();
 
 private:
     Deck       deck_m;
