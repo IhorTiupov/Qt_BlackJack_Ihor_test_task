@@ -40,6 +40,7 @@ private:
     void dealerPlay();
     void checkWinner();
     void showDealerCards();
+    std::pair<int, int> currentScores() const;
 
 private:
     Deck       deck_m;

@@ -59,7 +59,7 @@ void BlackJackGame::playerStand()
 
     //if(dealer_m.hand().isBust() || dealer_m.hand().calculateScore() >= 17)
     //{
-    //    checkWinner();
+    checkWinner();
     //}
 }
 
@@ -125,4 +125,9 @@ void BlackJackGame::showDealerCards()
     {
         checkWinner();
     }
+}
+
+std::pair<int, int> BlackJackGame::currentScores() const
+{
+    return {player_m.hand().calculateScore(), dealer_m.hand().calculateScore()};
 }

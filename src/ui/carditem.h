@@ -6,7 +6,7 @@
 class CardItem: public QGraphicsPixmapItem
 {
 public:
-    CardItem(const Card& card,qreal scale, QGraphicsItem* parent = nullptr);//new
+    CardItem(const Card& card, QGraphicsItem* parent = nullptr);
 
     static QString suitToString(Suit suit);
     static QString rankToString(Rank rank);
@@ -21,7 +21,5 @@ private:
 private:
     Card card_m;
     bool faceSideCard_m;
-    qreal scale_m; //new
-
 };
 

@@ -1,14 +1,14 @@
 #include "carditem.h"
+#include "gameview.h"
 #include <QString>
 #include <QMap> //new
 
 static QMap<QString, QPixmap> pixmapCache;
 
-CardItem::CardItem(const Card& card,qreal scale, QGraphicsItem* parent): //new
+CardItem::CardItem(const Card& card, QGraphicsItem* parent): //new
     QGraphicsPixmapItem(parent),
     card_m(card),
-    faceSideCard_m(true),
-    scale_m(scale) //new
+    faceSideCard_m(true)
 {
     updatePixmap();
 }
@@ -29,10 +29,10 @@ QString CardItem::rankToString(Rank rank)
 {
     switch (rank)
     {
-    case Rank::Ace:   return "ace";
-    case Rank::King:  return "king";
-    case Rank::Queen: return "queen";
-    case Rank::Jack:  return "jack";
+    case Rank::Ace:   return "A";
+    case Rank::King:  return "K";
+    case Rank::Queen: return "Q";
+    case Rank::Jack:  return "J";
     default:
         return QString("%1").arg(static_cast<int>(rank), 2, 10, QChar('0'));
     }
@@ -75,7 +75,8 @@ void CardItem::updatePixmap()
     {
         path = ":/cards/assets/cards/PNG/card_back.png";
     }
-    QPixmap pix = loadPixmap(path); //new
+
+    QPixmap pix = loadPixmap(path);
     if(pix.isNull())
     {
         qDebug() << "pixmap is NULL for path: " << path;
@@ -84,10 +85,10 @@ void CardItem::updatePixmap()
     {
         qDebug() << "pixmap loaded: " << path;
     }
-    setPixmap(QPixmap(pix)); //new
-    setScale(0.4);
-    qDebug() << "Card scale: " << scale_m;
+    setPixmap(pix.scaled(GameView::CARD_WIDTH  * GameView::CARD_SCALE,
+                         GameView::CARD_HEIGHT * GameView::CARD_SCALE,
+                         Qt::KeepAspectRatio,
+                         Qt::SmoothTransformation));
     qDebug() << "Loading pixmap: " << path;
-
 }
 
