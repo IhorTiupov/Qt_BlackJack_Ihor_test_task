@@ -56,11 +56,7 @@ void BlackJackGame::playerStand()
 
     stateGame_m = GameState::DealerTurn;
     dealerPlay();
-
-    //if(dealer_m.hand().isBust() || dealer_m.hand().calculateScore() >= 17)
-    //{
     checkWinner();
-    //}
 }
 
 GameState BlackJackGame::gameState() const

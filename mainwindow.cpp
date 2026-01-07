@@ -5,7 +5,6 @@
 
 
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -22,26 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->pushButtonStand, &QPushButton::clicked,
             this, &MainWindow::onStandClicked);
+    connect(ui->pushButtonRestart, &QPushButton::clicked,
+            this, &MainWindow::onRestartClicked);
 
-
-
-
-    /*auto* scene = new QGraphicsScene(this);
-    ui->graphicsView->setScene(scene);
-
-    QPixmap pix(":/cards/assets/cards/PNG/card_back.png");
-
-    if(pix.isNull())
-    {
-        qDebug() <<"Image is not founded!";
-    }
-    else
-    {
-        qDebug()<<"Image is loaded!";
-        scene->addPixmap(pix);
-        scene->setSceneRect(pix.rect());
-    }
-    */
 }
 
 MainWindow::~MainWindow()
@@ -53,11 +35,31 @@ void MainWindow::onHitClicked()
 {
     game_m.playerHit();
     view_m->updateFromGame(game_m);
+
+    if (game_m.gameState() == GameState::Finished)
+    {
+        ui->pushButtonRestart->setEnabled(true);
+    }
+
 }
 
 void MainWindow::onStandClicked()
 {
     game_m.playerStand();
     view_m->updateFromGame(game_m);
+
+    if (game_m.gameState() == GameState::Finished)
+    {
+        ui->pushButtonRestart->setEnabled(true);
+    }
 }
 
+void MainWindow::onRestartClicked()
+{
+    if(game_m.gameState() == GameState::Finished)
+    {
+        game_m.startNewGame();
+        view_m->updateFromGame(game_m);
+        ui->pushButtonRestart->setEnabled(false);
+    }
+}

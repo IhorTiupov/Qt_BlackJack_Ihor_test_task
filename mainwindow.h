@@ -23,6 +23,7 @@ public:
 private slots:
     void onHitClicked();
     void onStandClicked();
+    void onRestartClicked();
 
 
 private:
