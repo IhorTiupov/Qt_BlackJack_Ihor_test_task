@@ -15,7 +15,7 @@ public:
     bool isFaceCardUp() const;
 
 private:
-    QPixmap loadPixmap(const QString& path);//new
+    QPixmap loadPixmap(const QString& path);
     void updatePixmap();
 
 private:

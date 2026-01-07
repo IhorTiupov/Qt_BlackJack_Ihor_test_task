@@ -1,11 +1,11 @@
 #include "carditem.h"
 #include "gameview.h"
 #include <QString>
-#include <QMap> //new
+#include <QMap>
 
 static QMap<QString, QPixmap> pixmapCache;
 
-CardItem::CardItem(const Card& card, QGraphicsItem* parent): //new
+CardItem::CardItem(const Card& card, QGraphicsItem* parent):
     QGraphicsPixmapItem(parent),
     card_m(card),
     faceSideCard_m(true)
@@ -49,7 +49,7 @@ bool CardItem::isFaceCardUp() const
     return faceSideCard_m;
 }
 
-QPixmap CardItem::loadPixmap(const QString& path) // new
+QPixmap CardItem::loadPixmap(const QString& path)
 {
     if(pixmapCache.contains(path))
     {

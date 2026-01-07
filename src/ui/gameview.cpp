@@ -93,8 +93,8 @@ void GameView::drawDealerHand(const BlackJackGame& game)
     bool hideSecondCard = (game.gameState() == GameState::PlayerTurn);
     drawHand(game.dealerHand(), y, hideSecondCard);
 
-    scene_m->addText(QString("Dealer: %1").arg(game.dealerHand().calculateScore()),
-                     QFont("Arial", 16))->setPos(50, y + CARD_HEIGHT * CARD_SCALE - 100);
+    //scene_m->addText(QString("Dealer: %1").arg(game.dealerHand().calculateScore()),
+    //                 QFont("Arial", 16))->setPos(50, y + CARD_HEIGHT * CARD_SCALE - 100);
 
 }
 
