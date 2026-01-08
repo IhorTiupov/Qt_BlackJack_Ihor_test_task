@@ -57,4 +57,9 @@
         <file>assets/cards/PNG/card_spades_K.png</file>
         <file>assets/cards/PNG/card_spades_Q.png</file>
     </qresource>
+    <qresource prefix="/sounds">
+        <file>assets/sounds/background_music.wav</file>
+        <file>assets/sounds/button_click.wav</file>
+        <file>assets/sounds/card_deal.wav</file>
+    </qresource>
 </RCC>

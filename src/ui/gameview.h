@@ -18,7 +18,7 @@ public:
     static constexpr int CARD_WIDTH    = 60;
     static constexpr int CARD_HEIGHT   = 90;
     static constexpr int CARD_DISTANCE = 10;
-    static constexpr qreal CARD_SCALE = 1.5;
+    static constexpr double CARD_SCALE = 1.5;
 
 private:
     void clearScene();

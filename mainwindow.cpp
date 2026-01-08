@@ -1,8 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "soundmanager.h"
 
 #include <QPushButton>
 
+
+SoundManager *soundManager;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -11,6 +14,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    soundManager = new SoundManager(this);
+
+    soundManager->startBackgroundMusic();
+
     view_m = ui->graphicsView;
 
     game_m.startNewGame();
@@ -18,17 +25,30 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->pushButtonHit, &QPushButton::clicked,
             this, &MainWindow::onHitClicked);
-
     connect(ui->pushButtonStand, &QPushButton::clicked,
             this, &MainWindow::onStandClicked);
     connect(ui->pushButtonRestart, &QPushButton::clicked,
             this, &MainWindow::onRestartClicked);
+
+    connect(ui->pushButtonHit, &QPushButton::clicked,
+            soundManager, &SoundManager::playButtonClick);
+
+    connect(ui->pushButtonStand, &QPushButton::clicked,
+            soundManager, &SoundManager::playButtonClick);
+
+    connect(ui->pushButtonRestart, &QPushButton::clicked,
+            soundManager, &SoundManager::playButtonClick);
+
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    if (soundManager)
+    {
+        soundManager->stopBackgroundMusic();
+    }
 }
 
 void MainWindow::onHitClicked()

@@ -1,11 +1,27 @@
-#ifndef SOUNDMANAGER_H
-#define SOUNDMANAGER_H
+#pragma once
+
+#include <QObject>
+#include <QSoundEffect>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 
-class SoundManager
+
+class SoundManager: public QObject
 {
+    Q_OBJECT
 public:
-    SoundManager();
+    explicit SoundManager(QObject* parent = nullptr);
+
+    void playButtonClick();
+    void playCardDeal();
+    void startBackgroundMusic();
+    void stopBackgroundMusic();
+
+private:
+    QSoundEffect buttonClick;
+    QSoundEffect cardDeal;
+    QMediaPlayer musicPlayer;
+    QAudioOutput audioOutput;
 };
 
-#endif // SOUNDMANAGER_H
