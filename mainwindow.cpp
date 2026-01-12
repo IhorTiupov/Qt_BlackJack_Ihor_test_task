@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     soundManager = new SoundManager(this);
 
     soundManager->startBackgroundMusic();
+    soundManager->playCardDeal();
 
     view_m = ui->graphicsView;
 
@@ -38,8 +39,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->pushButtonRestart, &QPushButton::clicked,
             soundManager, &SoundManager::playButtonClick);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -53,6 +52,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::onHitClicked()
 {
+    soundManager->playCardDeal();
     game_m.playerHit();
     view_m->updateFromGame(game_m);
 
@@ -64,6 +64,7 @@ void MainWindow::onHitClicked()
 
 void MainWindow::onStandClicked()
 {
+    soundManager->playCardDeal();
     game_m.playerStand();
     view_m->updateFromGame(game_m);
 
@@ -75,6 +76,7 @@ void MainWindow::onStandClicked()
 
 void MainWindow::onRestartClicked()
 {
+    soundManager->playCardDeal();
     if(game_m.gameState() == GameState::Finished)
     {
         game_m.startNewGame();
