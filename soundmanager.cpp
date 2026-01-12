@@ -5,13 +5,13 @@
 SoundManager::SoundManager(QObject* parent): QObject(parent)
 {
     buttonClick.setSource(QUrl("qrc:/sounds/assets/sounds/button_click.wav"));
-    buttonClick.setVolume(100);
+    buttonClick.setVolume(1);
     cardDeal.setSource(QUrl("qrc:/sounds/assets/sounds/card_deal.wav"));
-    cardDeal.setVolume(100);
+    cardDeal.setVolume(1);
 
     musicPlayer.setAudioOutput(&audioOutput);
     musicPlayer.setSource(QUrl("qrc:/sounds/assets/sounds/background_music.wav"));
-    audioOutput.setVolume(50);
+    audioOutput.setVolume(0.1);
 }
 
 void SoundManager::playButtonClick()
