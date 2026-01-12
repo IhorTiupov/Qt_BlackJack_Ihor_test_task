@@ -60,7 +60,6 @@ void MainWindow::onHitClicked()
     {
         ui->pushButtonRestart->setEnabled(true);
     }
-
 }
 
 void MainWindow::onStandClicked()
